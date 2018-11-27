@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书查询</title>
+    <script text="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+</head>
+<style type="text/css">
+    form {
+        max-width: 30rem;
+        margin: 0 auto;
+        padding: 1.5rem 2rem;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    h1{
+        text-align: center;
+    }
+</style>
+<body>
+    <div>
+        <form id="selectbook" onsubmit="return false;" method="post">
+            查找图书：<br>
+            图书名:<input type="text" id="selectbookname" name="selectbookname"/><br>
+            <input type="submit" name="selectbooksubmit" value="查询">
+            <span id="findspan"></span>
+        </form>
+
+    </div>
+
+
+
+
+
+<script>
+    $("#selectbook").submit(function () {
+        $.ajax({
+            type:"post",
+            url:"book/selectbookbyname",
+            data:$("#selectbook").serialize(),
+            dataType:"json",
+            success:function (data) {
+                if (data.code==1){
+                    $(data.msg).each(function (data) {
+                        var h = "图书编号："+this.BID+
+                                "<br>"+"图书名："+this.BNAME+
+                                "<br>"+"作者："+this.AUTHOR+
+                                "<br>"+"出版日期："+this.PUBLICATION+
+                                "<br>"+"价格："+this.PRICE+
+                                "<br>"+"出版社："+this.PUBLISHINGCOMPANY;
+                        $("findspan").html(h);
+                    })
+                }else if (data.code == 0) {
+                    alert(data.msg);
+                }
+            }
+        })
+    })
+</script>
+</body>
+</html>

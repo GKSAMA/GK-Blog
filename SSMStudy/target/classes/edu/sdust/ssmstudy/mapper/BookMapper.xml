@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.sdust.ssmstudy.mapper.BookMapper">
+    <resultMap id="BaseResultMap" type="edu.sdust.ssmstudy.pojo.Book">
+
+        <id column="BID" jdbcType="VARCHAR" property="BID"/>
+        <result column="BNAME" jdbcType="VARCHAR" property="BNAME"/>
+        <result column="AUTHOR" jdbcType="VARCHAR" property="AUTHOR"/>
+        <result column="PUBLICATION" jdbcType="DATE" property="PUBLICATION"/>
+        <result column="PRICE" jdbcType="DOUBLE" property="PRICE"/>
+        <result column="PUBLISHINGCOMPANY" jdbcType="VARCHAR" property="PUBLISHINGCOMPANY"/>
+    </resultMap>
+    <select id="selectBykeyWord" parameterType="String" resultType="edu.sdust.ssmstudy.pojo.Book">
+        SELECT * FROM basebookinfo WHERE
+        BNAME LIKE #{BNAME}
+    </select>
+</mapper>

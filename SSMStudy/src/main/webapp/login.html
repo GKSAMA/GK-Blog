@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <script text="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+<form id="testform" onsubmit="return false;" method="post">
+    用户名<input type="text" id="username" name="username">
+    密码<input type="password" id="password" name="password">
+    <input type="submit" name="loginsubmit" value="登录">
+
+</form>
+<form id="registerform" method="post">
+    用户名<input type="text" id="rusername" name="rusername">
+    密码<input type="password" id="rpassword" name="rpassword">
+    性别<input type="text" id="rsex" name="rsex">
+    邮箱<input type="text" id="remail" name="remail">
+</form>
+
+<script>
+$("#testform").submit(function () {
+    $.ajax({
+        type:"post",
+        url:"user/login",
+        data:$("#testform").serialize(),
+        dataType:"json",
+        success:function (data) {
+            if(data.code==1){
+                window.location.href="index.html";
+            }else if(data.code==0){
+                alert(data.msg);
+            }
+        }
+    })
+})
+
+</script>
+</body>
+</html>
